@@ -61,35 +61,7 @@ describe('backend-express-template routes', () => {
       release_date: '2035',
       user_id: user.id,
     });
-  });
-
-  it('should be able to update single album', async () => {
-    const [agent, user] = await registerAndLogin();
-    const album = await Album.insert({ 
-      album_name: 'testAlbum', 
-      artist: 'testArtist', 
-      genre: 'testGenre', 
-      release_date: '1999', 
-      user_id: user.id 
-    });
-    const response = await agent
-      .put(`/api/v1/albums/${album.id}`)
-      .send({ 
-        album_name: 'new Name', 
-        artist: 'testArtist2', 
-        genre: 'testGenre2', 
-        release_date: '1900'
-      });
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual({
-      id: expect.any(String),
-      album_name: 'new Name',
-      artist: 'testArtist2',
-      genre: 'testGenre2',
-      release_date: '1900',
-      user_id: user.id,
-    });
-  });
+  })
   afterAll(() => {
     pool.end();
   });

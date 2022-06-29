@@ -78,7 +78,8 @@ describe('backend-express-template routes', () => {
         album_name: 'new Name', 
         artist: 'testArtist2', 
         genre: 'testGenre2', 
-        release_date: '1900'
+        release_date: '1900', 
+        user_id: user.id 
       });
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({

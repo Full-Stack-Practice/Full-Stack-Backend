@@ -20,12 +20,4 @@ module.exports = Router()
       next(e);
     }
   })
-  .put('/:id', authenticate, async (req, res, next) => {
-    try {
-      const updatedAlbum = await Album.update(req.params.id, req.body);
-      res.json(updatedAlbum);
-    } catch(e) {
-      next(e);
-    }
-  })
 ;
