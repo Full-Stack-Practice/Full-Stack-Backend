@@ -28,10 +28,4 @@ module.exports = class Album {
     return rows.map(row => new Album(row));
   }
 
-  static async update(id, { album_name, artist, genre, release_date }) {
-    const { rows } = await pool.query('UPDATE albums SET album_name = $1, artist = $2, genre = $3, release_date = $4 WHERE id = $5 RETURNING *',
-      [album_name, artist, genre, release_date, id]);
-    return new Album(rows[0]);
-  }
-  
 };
