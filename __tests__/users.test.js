@@ -53,6 +53,7 @@ describe('user routes', () => {
     const [agent, user] = await registerAndLogin();
     const currentUser = await agent
       .get('/api/v1/users/currentUser');
+
     expect(currentUser.body).toEqual({
       ...user, 
       exp: expect.any(Number),
