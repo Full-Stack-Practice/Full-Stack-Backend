@@ -14,7 +14,7 @@ const registerAndLogin = async (userProps = {}) => {
   const password = userProps.password ?? mockUser.password;
   const agent = request.agent(app);
 
-  const user = await UserService.create({ ...mockUser, ...userProps});
+  const user = await UserService.create({ ...mockUser, ...userProps });
 
   const { email } = user;
   await agent.post('/api/v1/users/sessions').send({ email, password });
@@ -51,9 +51,8 @@ describe('user routes', () => {
 
   it('GET / get authenticated user', async () => {
     const [agent, user] = await registerAndLogin();
-    const currentUser = await agent(app)
+    const currentUser = await agent
       .get('/api/v1/users/currentUser');
-    
     expect(currentUser.body).toEqual({
       ...user, 
       exp: expect.any(Number),
