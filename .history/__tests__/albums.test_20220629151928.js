@@ -40,28 +40,6 @@ describe('backend-express-template routes', () => {
     expect(response.status).toEqual(200);
     expect(response.body[0]).toEqual(album);
   });
-
-  it('should be able to add a new album', async () => {
-    const [agent, user] = await registerAndLogin();
-    const response = await agent
-      .post('/api/v1/albums')
-      .send({ 
-        album_name: 'testAlbum2', 
-        artist: 'testArtist2', 
-        genre: 'testGenre2', 
-        release_date: '2035', 
-        user_id: user.id 
-      });
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual({
-      id: expect.any(String),
-      album_name: 'testAlbum2',
-      artist: 'testArtist2',
-      genre: 'testGenre2',
-      release_date: '2035',
-      user_id: user.id,
-    });
-  })
   afterAll(() => {
     pool.end();
   });

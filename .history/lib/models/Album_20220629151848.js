@@ -25,6 +25,7 @@ module.exports = class Album {
 
   static async getAll(user_id) {
     const { rows } = await pool.query('SELECT * FROM albums WHERE user_id = $1 ORDER BY album_name', [user_id]);
+    console.log(rows);
     return rows.map(row => new Album(row));
   }
 

@@ -52,7 +52,7 @@ describe('backend-express-template routes', () => {
         release_date: '2035', 
         user_id: user.id 
       });
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(201);
     expect(response.body).toEqual({
       id: expect.any(String),
       album_name: 'testAlbum2',
