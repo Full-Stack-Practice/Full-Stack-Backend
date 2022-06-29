@@ -66,7 +66,7 @@ describe('user routes', () => {
     const currentUser = await agent
       .delete('/api/v1/users/sessions');
 
-    expect(currentUser.body).toEqual('');
+    expect(currentUser.body).toEqual({ success: true, message: 'Signed out Successfully!' });
   });
 
 
