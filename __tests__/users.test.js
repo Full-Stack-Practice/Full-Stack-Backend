@@ -36,7 +36,7 @@ describe('user routes', () => {
     });
   });
 
-  it('should login user', async () => {
+  it('POST /sessions should login user', async () => {
 
     await UserService.create(mockUser);
     const { email, password } = mockUser;
@@ -47,7 +47,18 @@ describe('user routes', () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ message: 'Signed in successfully!' });
+  });
 
+  it('GET / get authenticated user', async () => {
+    const [agent, user] = await registerAndLogin();
+    const currentUser = await agent(app)
+      .get('/api/v1/users/currentUser');
+    
+    expect(currentUser.body).toEqual({
+      ...user, 
+      exp: expect.any(Number),
+      iat: expect.any(Number)
+    });
   });
 
 
