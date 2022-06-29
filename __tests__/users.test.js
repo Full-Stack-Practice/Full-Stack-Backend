@@ -21,7 +21,7 @@ const registerAndLogin = async (userProps = {}) => {
   return [agent, user];
 };
 
-describe('backend-express-template routes', () => {
+describe('user routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -36,6 +36,20 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('should login user', async () => {
+
+    const [agent, user] = await registerAndLogin();
+    const { username, email } = user;
+
+    const res = await agent.get('/api/v1/users/me');
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      username,
+      email,
+    });
+  });
+
+  
   afterAll(() => {
     pool.end();
   });
