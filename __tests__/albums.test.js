@@ -93,7 +93,7 @@ describe('backend-express-template routes', () => {
 
   it('should be able to delete a specific albums', async () => {
     const [agent, user] = await registerAndLogin();
-    await Album.insert({ 
+    const album =  await Album.insert({ 
       album_name: 'testAlbum', 
       artist: 'testArtist', 
       genre: 'testGenre', 
@@ -103,7 +103,7 @@ describe('backend-express-template routes', () => {
     const response = await agent
       .delete('/api/v1/albums/1');
     expect(response.status).toEqual(200);
-    expect(response.body).toEqual('');
+    expect(response.body).toEqual(album);
   });
 
   afterAll(() => {
