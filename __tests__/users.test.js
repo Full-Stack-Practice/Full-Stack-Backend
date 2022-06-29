@@ -2,12 +2,12 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const UserService = require('../lib/services/UserService');
+const UserService = require('../lib/services/UserServices');
 
 const mockUser = {
   username: 'Test',
   email: 'test@example.gov',
-  password: '12345',
+  password: '123456',
 };
 
 const registerAndLogin = async (userProps = {}) => {
@@ -35,7 +35,7 @@ describe('backend-express-template routes', () => {
       email,
     });
   });
-  
+
   afterAll(() => {
     pool.end();
   });
