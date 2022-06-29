@@ -61,6 +61,14 @@ describe('user routes', () => {
     });
   });
 
+  it('delete / ends session of current user', async () => {
+    const [agent] = await registerAndLogin();
+    const currentUser = await agent
+      .delete('/api/v1/users/sessions');
+
+    expect(currentUser.body).toEqual('');
+  });
+
 
   afterAll(() => {
     pool.end();
