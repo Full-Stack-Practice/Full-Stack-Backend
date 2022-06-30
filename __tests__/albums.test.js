@@ -90,6 +90,22 @@ describe('backend-express-template routes', () => {
       user_id: user.id,
     });
   });
+
+  it('should be able to delete a specific albums', async () => {
+    const [agent, user] = await registerAndLogin();
+    const album =  await Album.insert({ 
+      album_name: 'testAlbum', 
+      artist: 'testArtist', 
+      genre: 'testGenre', 
+      release_date: '1999', 
+      user_id: user.id 
+    });
+    const response = await agent
+      .delete('/api/v1/albums/1');
+    expect(response.status).toEqual(200);
+    expect(response.body).toEqual(album);
+  });
+
   afterAll(() => {
     pool.end();
   });
